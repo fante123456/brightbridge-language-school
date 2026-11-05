@@ -1,26 +1,110 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+  BrightBridge design tokens (Direction A "Bright Span").
+  Royal blue is the brand, yellow is the single highlight (fills only,
+  always with dark blue text), green is for small positive details only.
+*/
+@theme {
+  --color-brand: #1e3a8a; /* Royal Blue */
+  --color-brand-deep: #172554; /* body text, footer */
+  --color-brand-700: #1d348a;
+  --color-brand-soft: #eaeff9; /* tint panels */
+  --color-brand-line: #d6deee; /* borders on white */
+  --color-sun: #facc15; /* Fresh Yellow: fills only */
+  --color-sun-deep: #eab308; /* yellow hover */
+  --color-paper: #f9fafb; /* Soft White */
+  --color-slate: #64748b; /* secondary text, >= 16px */
+  --color-leaf: #22c55e; /* Bright Green: icons/dots only */
+
+  --font-display: var(--font-nunito), ui-rounded, system-ui, sans-serif;
+  --font-sans: var(--font-atkinson), system-ui, sans-serif;
+
+  --radius-card: 1.25rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    background: var(--color-paper);
+    color: var(--color-brand-deep);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    color: var(--color-brand);
+    text-wrap: balance;
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Atkinson's slashed zero reads like a strikethrough in bold labels,
+     so short numeric UI (times, phone numbers, data values) uses Nunito. */
+  dd,
+  a[href^="tel:"],
+  .num {
+    font-family: var(--font-display);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-sun);
+    outline-offset: 3px;
+    border-radius: 0.375rem;
+  }
+
+  /* On yellow fills the focus ring switches to blue so it stays visible. */
+  .focus-on-sun:focus-visible {
+    outline-color: var(--color-brand);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ---------- Light, friendly motion (off when reduced motion is asked) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .rise {
+    animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .rise-2 {
+    animation-delay: 0.08s;
+  }
+  .rise-3 {
+    animation-delay: 0.16s;
+  }
+
+  /* Scroll reveal, progressive enhancement: browsers without
+     scroll-driven animations simply show the content. */
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+/* Slide only, no fade: text keeps full contrast while it moves in. */
+@keyframes reveal {
+  from {
+    transform: translateY(24px);
+  }
 }
