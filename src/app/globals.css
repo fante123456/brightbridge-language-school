@@ -60,15 +60,17 @@
     font-family: var(--font-display);
   }
 
+  /* Keyboard focus: royal blue on light backgrounds (about 10:1), and
+     yellow inside the blue bands (about 7:1), so it is always easy to see. */
   :focus-visible {
-    outline: 3px solid var(--color-sun);
+    outline: 3px solid var(--color-brand);
     outline-offset: 3px;
     border-radius: 0.375rem;
   }
 
-  /* On yellow fills the focus ring switches to blue so it stays visible. */
-  .focus-on-sun:focus-visible {
-    outline-color: var(--color-brand);
+  .bg-brand :focus-visible,
+  .bg-brand-deep :focus-visible {
+    outline-color: var(--color-sun);
   }
 }
 

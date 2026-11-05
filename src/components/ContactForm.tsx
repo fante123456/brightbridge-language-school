@@ -69,7 +69,7 @@ function validate(f: Fields): Errors {
 const order: (keyof Fields)[] = ["name", "email", "phone", "course", "level", "message", "consent"];
 
 const inputClass =
-  "mt-2 block min-h-12 w-full rounded-xl border-2 border-brand-line bg-white px-4 text-base text-brand-deep transition-colors placeholder:text-slate hover:border-brand/40 focus:border-brand focus:outline-none focus-visible:outline-3 focus-visible:outline-offset-2 aria-[invalid=true]:border-red-700";
+  "mt-2 block min-h-12 w-full rounded-xl border-2 border-brand-line bg-white px-4 text-base text-brand-deep transition-colors placeholder:text-slate hover:border-brand/40 focus:border-brand aria-[invalid=true]:border-red-700";
 
 function FieldError({ id, msg }: { id: string; msg?: string }) {
   if (!msg) return null;
@@ -177,7 +177,7 @@ export function ContactForm({ initialCourse }: { initialCourse?: string }) {
           {enquiryTypes.map((t) => (
             <label
               key={t.value}
-              className="flex min-h-12 cursor-pointer items-center gap-3 whitespace-nowrap rounded-xl sm:flex-auto border-2 border-brand-line bg-white px-4 font-bold transition-colors hover:border-brand/40 has-[:checked]:border-brand has-[:checked]:bg-brand-soft has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-sun"
+              className="flex min-h-12 cursor-pointer items-center gap-3 whitespace-nowrap rounded-xl sm:flex-auto border-2 border-brand-line bg-white px-4 font-bold transition-colors hover:border-brand/40 has-[:checked]:border-brand has-[:checked]:bg-brand-soft has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-brand"
             >
               <input
                 type="radio"

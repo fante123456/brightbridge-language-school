@@ -34,7 +34,7 @@ export default function ContactPage() {
       >
         <a
           href="#enquiry"
-          className="mt-8 inline-flex min-h-12 items-center rounded-full bg-sun px-6 font-bold text-brand-deep transition-colors hover:bg-sun-deep focus-on-sun"
+          className="mt-8 inline-flex min-h-12 items-center rounded-full bg-sun px-6 font-bold text-brand-deep transition-colors hover:bg-sun-deep"
         >
           Book a free trial lesson
         </a>
