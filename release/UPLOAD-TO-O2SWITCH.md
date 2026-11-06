@@ -25,11 +25,12 @@ a wrong address such as `/abc` (shows the 404 page) and `/sitemap.xml`.
 
 ## Web address
 
-This build uses the placeholder address `https://brightbridge-language-school.vercel.app` for the
-sitemap, canonical links and share image. When the real address is known, rebuild with it:
+This build uses the final address `https://brightbridge.ammar-rajabi.com` for the
+sitemap, canonical links and share image. Upload it to the folder of that subdomain.
+If the address ever changes, update `url` in `src/lib/site.ts`, then run:
 
 ```bash
-NEXT_PUBLIC_SITE_URL=https://your-real-domain npm run build && npm run zip
+npm run build && npm run zip
 ```
 
-(On Windows PowerShell: `$env:NEXT_PUBLIC_SITE_URL="https://your-real-domain"; npm run build; npm run zip`)
+(On Windows PowerShell: `npm run build; npm run zip`)
