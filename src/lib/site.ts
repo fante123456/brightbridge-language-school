@@ -6,7 +6,7 @@ export const site = {
   name: "BrightBridge Language School",
   shortName: "BrightBridge",
   tagline: "Learn languages with confidence",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://brightbridge-language-school.vercel.app",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://brightbridge.ammar-rajabi.com",
   phone: "0161 555 6841",
   phoneHref: "tel:+441615556841",
   email: "study@brightbridge.co.uk",
