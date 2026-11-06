@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,
   poweredByHeader: false,
+  experimental: {
+    // French and English each have their own root layout (<html lang>),
+    // so the 404 page is defined once in app/global-not-found.tsx.
+    globalNotFound: true,
+  },
   images: {
     // There is no Next.js image server on static hosting: Unsplash's CDN
     // resizes and converts to AVIF/WebP instead (see src/lib/unsplash-loader.ts).

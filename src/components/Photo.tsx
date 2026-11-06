@@ -1,8 +1,10 @@
 import Image from "next/image";
+import type { Locale } from "@/lib/i18n";
 import { photos, photoSrc, type PhotoKey } from "@/lib/photos";
 
 type Props = {
   name: PhotoKey;
+  locale: Locale;
   /** Real rendered widths, so next/image picks a small file on phones. */
   sizes: string;
   className?: string;
@@ -13,13 +15,13 @@ type Props = {
 };
 
 /** A next/image `fill` photo. Set the aspect ratio on `className`. */
-export function Photo({ name, sizes, className = "", imgClassName = "", preload, alt }: Props) {
+export function Photo({ name, locale, sizes, className = "", imgClassName = "", preload, alt }: Props) {
   const p = photos[name];
   return (
     <div className={`relative overflow-hidden bg-brand-soft ${className}`}>
       <Image
         src={photoSrc(p.id)}
-        alt={alt ?? p.alt}
+        alt={alt ?? p.alt[locale]}
         fill
         sizes={sizes}
         preload={preload}

@@ -6,14 +6,25 @@ export const dynamic = "force-static";
 export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
 
+/** "LG" monogram on the navy of the Let's Go English logo. */
 export default function AppleIcon() {
   return new ImageResponse(
     (
-      <div style={{ width: "100%", height: "100%", display: "flex", background: "#1E3A8A" }}>
-        <svg width="180" height="180" viewBox="0 0 40 40">
-          <path d="M9 27.5C9 18 14 12 20 12s11 6 11 15.5" fill="none" stroke="#F9FAFB" strokeWidth="3.4" strokeLinecap="round" />
-          <path d="M6.5 28h27" stroke="#FACC15" strokeWidth="3.4" strokeLinecap="round" />
-        </svg>
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          background: "#25395A",
+          color: "#FFFFFF",
+          fontSize: 92,
+          fontWeight: 700,
+          letterSpacing: -2,
+        }}
+      >
+        LG
       </div>
     ),
     size,

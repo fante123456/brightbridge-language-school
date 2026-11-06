@@ -2,10 +2,12 @@ import type { ReactNode } from "react";
 import { ArcEdge } from "./ArcEdge";
 import { Photo } from "./Photo";
 import { Container, Eyebrow } from "./Section";
+import type { Locale } from "@/lib/i18n";
 import type { PhotoKey } from "@/lib/photos";
 
 /** Blue page header for inner pages, closed by the bridge arc. */
 export function PageHero({
+  locale,
   eyebrow,
   title,
   intro,
@@ -13,6 +15,7 @@ export function PageHero({
   photoPosition = "",
   children,
 }: {
+  locale: Locale;
   eyebrow: string;
   title: string;
   intro: ReactNode;
@@ -34,6 +37,7 @@ export function PageHero({
         </div>
         <Photo
           name={photo}
+          locale={locale}
           sizes="(min-width: 1200px) 500px, (min-width: 1024px) 42vw, 100vw"
           imgClassName={photoPosition}
           preload

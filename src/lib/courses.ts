@@ -1,177 +1,134 @@
-// Fictional course catalogue for the demo. Prices are example "from" prices
-// in GBP and are labelled as fictional on the page.
+// The real offers of Let's Go English (public information, Nov 2026).
+// Prices and timetables are not public: they are given "on request".
 
-export const LEVELS = ["A1", "A2", "B1", "B2", "C1"] as const;
-export type Level = (typeof LEVELS)[number];
+import type { T } from "./i18n";
 
-export const LANGUAGES = ["English", "Spanish", "French", "German"] as const;
-export type Language = (typeof LANGUAGES)[number];
+export const AUDIENCES = ["little", "kids", "teens", "adults"] as const;
+export type Audience = (typeof AUDIENCES)[number];
 
-export type Format = "In person" | "Online" | "In person or online";
+export const audienceLabels: Record<Audience, T> = {
+  little: { fr: "Tout-petits (dès 12 mois – 6 ans)", en: "Little ones (12 months – 6 years)" },
+  kids: { fr: "Enfants (7–11 ans)", en: "Children (7–11)" },
+  teens: { fr: "Collégiens & lycéens", en: "Teenagers" },
+  adults: { fr: "Adultes", en: "Adults" },
+};
+
+/** Short labels for the filter buttons. */
+export const audienceShort: Record<Audience, T> = {
+  little: { fr: "Tout-petits", en: "Little ones" },
+  kids: { fr: "Enfants", en: "Children" },
+  teens: { fr: "Ados", en: "Teens" },
+  adults: { fr: "Adultes", en: "Adults" },
+};
 
 export type Course = {
   slug: string;
-  title: string;
-  language: Language;
+  title: T;
   /** Short code shown on the card badge. */
   code: string;
-  description: string;
-  levelFrom: Level;
-  levelTo: Level;
-  weeks: number;
-  hoursPerWeek: number;
-  format: Format;
-  maxClassSize: number;
-  priceFrom: number;
-  schedule: string;
-  audience?: string;
+  audiences: Audience[];
+  age: T;
+  description: T;
+  /** Only filled in when the business states it. */
+  session?: T;
+  group?: T;
+  format: T;
+  atHome?: boolean;
   popular?: boolean;
 };
 
 export const courses: Course[] = [
   {
-    slug: "english-for-beginners",
-    title: "English for Beginners",
-    language: "English",
-    code: "EN",
-    description:
-      "Start from zero and build everyday English step by step: introductions, shopping, travel, small talk at work and simple messages.",
-    levelFrom: "A1",
-    levelTo: "A2",
-    weeks: 10,
-    hoursPerWeek: 4,
-    format: "In person or online",
-    maxClassSize: 10,
-    priceFrom: 260,
-    schedule: "Mon & Wed, 18:30 – 20:30",
+    slug: "baby-steps",
+    title: { fr: "Baby Steps", en: "Baby Steps" },
+    code: "12m",
+    audiences: ["little"],
+    age: { fr: "Dès 12 mois", en: "From 12 months" },
+    description: {
+      fr: "Un éveil à l'anglais tout en douceur, avec maman ou papa.",
+      en: "A gentle first step into English, together with mum or dad.",
+    },
+    session: { fr: "Séances de 45 min", en: "45-minute sessions" },
+    group: { fr: "6 enfants maximum", en: "Max 6 children" },
+    format: { fr: "Avec un parent", en: "With a parent" },
     popular: true,
   },
   {
-    slug: "business-english",
-    title: "Business English",
-    language: "English",
-    code: "EN",
-    description:
-      "Practise meetings, emails, presentations and negotiation phrases through realistic workplace tasks, with feedback on every piece of writing.",
-    levelFrom: "B1",
-    levelTo: "C1",
-    weeks: 8,
-    hoursPerWeek: 3,
-    format: "In person or online",
-    maxClassSize: 8,
-    priceFrom: 340,
-    schedule: "Tue & Thu, 18:00 – 19:30",
+    slug: "very-small-and-little-learners",
+    title: { fr: "Very Small Learners & Little Learners", en: "Very Small Learners & Little Learners" },
+    code: "3–6",
+    audiences: ["little"],
+    age: { fr: "3–4 ans et 5–6 ans", en: "Ages 3–4 and 5–6" },
+    description: {
+      fr: "Des chansons, des comptines et des jeux pour découvrir l'anglais en s'amusant. Deux groupes : Very Small Learners (3–4 ans) et Little Learners (5–6 ans).",
+      en: "Songs, nursery rhymes and games to discover English while having fun. Two groups: Very Small Learners (3–4) and Little Learners (5–6).",
+    },
+    format: { fr: "En groupe", en: "In a group" },
   },
   {
-    slug: "ielts-preparation",
-    title: "IELTS Preparation",
-    language: "English",
-    code: "EN",
-    description:
-      "Structured practice in Listening, Reading, Writing and Speaking, timed mock tests and personal feedback. We help you prepare well; no course can promise a band score.",
-    levelFrom: "B1",
-    levelTo: "C1",
-    weeks: 6,
-    hoursPerWeek: 6,
-    format: "In person",
-    maxClassSize: 10,
-    priceFrom: 390,
-    schedule: "Mon, Wed & Fri, 10:00 – 12:00",
+    slug: "ateliers-7-10-ans",
+    title: { fr: "Ateliers 7–8 ans et 9–10 ans", en: "Workshops for ages 7–8 and 9–10" },
+    code: "7–10",
+    audiences: ["kids"],
+    age: { fr: "7–8 ans et 9–10 ans", en: "Ages 7–8 and 9–10" },
+    description: {
+      fr: "Un atelier plus structuré, chaque semaine en mini-groupe, pour progresser pas à pas.",
+      en: "A more structured weekly workshop in a small group, to make progress step by step.",
+    },
+    session: { fr: "1 h par semaine", en: "1 hour a week" },
+    group: { fr: "Mini-groupe", en: "Small group" },
+    format: { fr: "En groupe", en: "In a group" },
     popular: true,
   },
   {
-    slug: "spanish",
-    title: "Spanish",
-    language: "Spanish",
-    code: "ES",
-    description:
-      "Speak Spanish from the first lesson with role plays, listening practice and useful grammar for travel, friends and work.",
-    levelFrom: "A1",
-    levelTo: "B1",
-    weeks: 10,
-    hoursPerWeek: 3,
-    format: "In person",
-    maxClassSize: 10,
-    priceFrom: 230,
-    schedule: "Tue, 18:00 – 19:30 & Sat, 10:00 – 11:30",
+    slug: "collegiens-lyceens",
+    title: { fr: "Collégiens et lycéens", en: "Secondary school students" },
+    code: "Ados",
+    audiences: ["teens"],
+    age: { fr: "Collège et lycée", en: "Middle and high school" },
+    description: {
+      fr: "Des ateliers chaque semaine autour de jeux de rôle, d'échanges et de mini-projets.",
+      en: "Weekly workshops built around role plays, discussions and mini-projects.",
+    },
+    session: { fr: "1 h à 1 h 30 par semaine", en: "1 to 1.5 hours a week" },
+    format: { fr: "En groupe", en: "In a group" },
     popular: true,
   },
   {
-    slug: "french",
-    title: "French",
-    language: "French",
-    code: "FR",
-    description:
-      "Clear grammar, natural pronunciation and plenty of speaking, from ordering at a café to holding a confident conversation.",
-    levelFrom: "A1",
-    levelTo: "B2",
-    weeks: 10,
-    hoursPerWeek: 3,
-    format: "In person or online",
-    maxClassSize: 10,
-    priceFrom: 230,
-    schedule: "Mon & Thu, 18:30 – 20:00",
+    slug: "ateliers-immersifs",
+    title: { fr: "Ateliers immersifs", en: "Immersive workshops" },
+    code: "4–11",
+    audiences: ["little", "kids"],
+    age: { fr: "4–11 ans", en: "Ages 4–11" },
+    description: {
+      fr: "Jeux de rôle, cuisine et expériences scientifiques… le tout en anglais !",
+      en: "Role plays, cooking and science experiments… all in English!",
+    },
+    format: { fr: "En groupe", en: "In a group" },
   },
   {
-    slug: "german",
-    title: "German",
-    language: "German",
-    code: "DE",
-    description:
-      "Learn German in small live online groups, with step-by-step grammar, vocabulary for daily life and regular speaking practice.",
-    levelFrom: "A1",
-    levelTo: "B1",
-    weeks: 10,
-    hoursPerWeek: 3,
-    format: "Online",
-    maxClassSize: 10,
-    priceFrom: 230,
-    schedule: "Wed, 18:00 – 19:30 & Sat, 11:00 – 12:30",
+    slug: "stages-vacances",
+    title: { fr: "Stages de vacances", en: "Holiday courses" },
+    code: "3–10",
+    audiences: ["little", "kids"],
+    age: { fr: "3–10 ans", en: "Ages 3–10" },
+    description: {
+      fr: "Pendant les vacances, des stages en anglais avec des animatrices anglophones.",
+      en: "English courses during the school holidays, led by English-speaking leaders.",
+    },
+    format: { fr: "Pendant les vacances", en: "During the holidays" },
   },
   {
-    slug: "english-conversation-club",
-    title: "English Conversation Club",
-    language: "English",
-    code: "EN",
-    description:
-      "Relaxed weekly speaking sessions on news, culture and everyday topics to build fluency and confidence with other learners.",
-    levelFrom: "B1",
-    levelTo: "C1",
-    weeks: 6,
-    hoursPerWeek: 2,
-    format: "In person",
-    maxClassSize: 10,
-    priceFrom: 120,
-    schedule: "Thu, 18:30 – 20:30",
-  },
-  {
-    slug: "teen-english",
-    title: "Teen English (ages 12–16)",
-    language: "English",
-    code: "EN",
-    description:
-      "Saturday classes for young learners that build school and exam skills through projects, presentations and teamwork.",
-    levelFrom: "A2",
-    levelTo: "B2",
-    weeks: 12,
-    hoursPerWeek: 3,
-    format: "In person",
-    maxClassSize: 10,
-    priceFrom: 280,
-    schedule: "Sat, 10:00 – 13:00",
-    audience: "Young learners",
+    slug: "cours-a-domicile",
+    title: { fr: "Cours à domicile", en: "Home tutoring" },
+    code: "Dom.",
+    audiences: ["teens", "adults"],
+    age: { fr: "Ados et adultes", en: "Teens and adults" },
+    description: {
+      fr: "Des cours sur mesure chez vous, en anglais mais aussi en espagnol et en français langue étrangère. Service à la Personne : 50 % de réduction d'impôt.",
+      en: "Tailor-made lessons at your home, in English and also in Spanish and French as a foreign language. Eligible for the French “Service à la Personne” scheme: 50% tax reduction.",
+    },
+    format: { fr: "À domicile, sur mesure", en: "At home, tailor-made" },
+    atHome: true,
   },
 ];
-
-export function levelIndex(level: Level) {
-  return LEVELS.indexOf(level);
-}
-
-export function coversLevel(course: Course, level: Level) {
-  const i = levelIndex(level);
-  return i >= levelIndex(course.levelFrom) && i <= levelIndex(course.levelTo);
-}
-
-export function levelRange(course: Course) {
-  return `${course.levelFrom}–${course.levelTo}`;
-}

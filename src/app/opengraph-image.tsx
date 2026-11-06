@@ -1,13 +1,17 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
 // Pre-rendered at build time for the static export.
 export const dynamic = "force-static";
 
-export const alt = "BrightBridge Language School: learn languages with confidence, Manchester";
+export const alt = "Let's Go English, le spécialiste de l'anglais au Havre";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OpengraphImage() {
+export default async function OpengraphImage() {
+  const logo = await readFile(join(process.cwd(), "public/logo/letsgoenglish-logo-512.png"));
+  const logoSrc = `data:image/png;base64,${logo.toString("base64")}`;
   return new ImageResponse(
     (
       <div
@@ -15,35 +19,27 @@ export default function OpengraphImage() {
           width: "100%",
           height: "100%",
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          padding: "64px 80px 0",
+          alignItems: "center",
+          gap: 64,
+          padding: "0 80px",
           background: "#1E3A8A",
           color: "#FFFFFF",
-          position: "relative",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <svg width="76" height="76" viewBox="0 0 40 40">
-            <rect width="40" height="40" rx="11" fill="#172554" />
-            <path d="M9 27.5C9 18 14 12 20 12s11 6 11 15.5" fill="none" stroke="#F9FAFB" strokeWidth="3.4" strokeLinecap="round" />
-            <path d="M6.5 28h27" stroke="#FACC15" strokeWidth="3.4" strokeLinecap="round" />
-          </svg>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <div style={{ fontSize: 40, fontWeight: 800 }}>BrightBridge</div>
-            <div style={{ fontSize: 18, letterSpacing: 4, color: "#E2E8F0" }}>LANGUAGE SCHOOL</div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={logoSrc} width={380} height={380} alt="" style={{ borderRadius: 48 }} />
+        <div style={{ display: "flex", flexDirection: "column", maxWidth: 620 }}>
+          <div style={{ fontSize: 30, letterSpacing: 2, color: "#FACC15", fontWeight: 700 }}>LE HAVRE</div>
+          <div style={{ marginTop: 16, fontSize: 68, lineHeight: 1.05, fontWeight: 800 }}>
+            Le spécialiste de l&apos;anglais au Havre
+          </div>
+          <div style={{ marginTop: 28, fontSize: 30, color: "#E2E8F0" }}>
+            Dès 12 mois · Enfants · Ados · Adultes
+          </div>
+          <div style={{ marginTop: 40, fontSize: 22, color: "#CBD5E1" }}>
+            Projet d&apos;entraînement – site non officiel
           </div>
         </div>
-        <div style={{ display: "flex", flexDirection: "column", maxWidth: 900 }}>
-          <div style={{ fontSize: 80, lineHeight: 1.05, fontWeight: 800 }}>Learn languages with confidence</div>
-          <div style={{ marginTop: 24, fontSize: 30, color: "#E2E8F0" }}>
-            English · IELTS · Spanish · French · German · Manchester & online
-          </div>
-        </div>
-        <svg width="1200" height="120" viewBox="0 0 1440 120" style={{ marginLeft: -80 }}>
-          <path d="M0 120V64C360 8 1080 8 1440 64v56Z" fill="#F9FAFB" />
-          <rect x="560" y="44" width="320" height="14" rx="7" fill="#FACC15" />
-        </svg>
       </div>
     ),
     size,
