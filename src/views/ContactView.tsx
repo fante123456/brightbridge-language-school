@@ -22,7 +22,6 @@ const text = {
     details: "Coordonnées",
     address: "Adresse",
     phone: "Téléphone",
-    phoneNote: "Pendant les horaires d'accueil",
     email: "E-mail",
     hours: "Horaires d'accueil",
     formEyebrow: "Demande d'informations",
@@ -50,7 +49,6 @@ const text = {
     details: "Contact details",
     address: "Address",
     phone: "Phone",
-    phoneNote: "During reception hours",
     email: "Email",
     hours: "Reception hours",
     formEyebrow: "Information request",
@@ -107,7 +105,6 @@ export function ContactView({ locale }: { locale: Locale }) {
               <a href={site.phoneHref} className="mt-1 block font-bold text-brand underline-offset-4 hover:underline">
                 {site.phone}
               </a>
-              <p className="text-[0.9375rem] text-slate">{t.phoneNote}</p>
             </li>
             <li className="rounded-[var(--radius-card)] border border-brand-line bg-white p-6">
               <Mail className="size-6 text-brand" aria-hidden="true" />

@@ -326,14 +326,7 @@ export function HomeView({ locale }: { locale: Locale }) {
               return (
                 <li key={r.name} className="reveal">
                   <figure className="flex h-full flex-col rounded-[var(--radius-card)] border border-brand-line bg-white p-6 sm:p-7">
-                    <div className="flex items-center justify-between">
-                      <Quote className="size-8 text-brand/25" aria-hidden="true" />
-                      <span className="flex gap-0.5" aria-hidden="true">
-                        {Array.from({ length: 5 }).map((_, i) => (
-                          <Star key={i} className="size-4 fill-sun-deep text-sun-deep" />
-                        ))}
-                      </span>
-                    </div>
+                    <Quote className="size-8 text-brand/25" aria-hidden="true" />
                     <blockquote lang={q.lang} className="mt-3 flex-1 text-lg leading-relaxed text-brand-deep">
                       <p>“{q.text}”</p>
                     </blockquote>
